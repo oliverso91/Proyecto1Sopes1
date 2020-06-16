@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Proyecto 1 Sopes1</title>
+
+
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./js/bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Web Monitoring PC</a>
+      <ul class="navbar-nav px-3">
+
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">
+                  <span data-feather="hard-drive"></span>
+                  Principal <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cpu.html">
+                  <span data-feather="cpu"></span>
+                    CPU
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ram.html">
+                  <span data-feather="server"></span>
+                  RAM
+                </a>
+              </li>
+
+
+            </ul>
+
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">CPU</h1>
+            <div id="infoCpu">  </div>
+
+          </div>
+% de uso
+<canvas class="my-4" id="myChart" width="900" height="350"></canvas>
+<p>Segundos</p>
+
+          <div class="table-responsive">
+          <table class="table table-striped table-sm">
+
+            <tbody>
+              <tr>
+                <td>Uso <p> <div id="usoCpu"></div></td>
+                <td>Velocidad <p> <div id="VelocidadCpu"></div></td>
+                <td></td>
+                <td></td>
+              <td>Velocidad Base <p> <div id="VelocidadB"></div></td>
+              </tr>
+              <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            <td>Nucleos <p> <div id="nucleoCpu"></div> </td>
+            </tr>
+
+            <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          <td>Procesadores Logicos <p> <div id="proL"</td>
+          </tr>
+
+            </tbody>
+          </table>
+        </div>
+        </main>
+
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+
+    </script>
+
+    <script src="js/cpu.js"></script>
+
+  </body>
+</html>
