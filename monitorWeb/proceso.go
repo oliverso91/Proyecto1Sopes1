@@ -1,7 +1,7 @@
 package main
 
 import (
-
+	"log"
 	"net/http"
 	"io/ioutil"
 	"strings"
@@ -9,6 +9,8 @@ import (
 	"strconv"
 	"encoding/json"
 	"github.com/gorilla/mux"
+	"os/exec"
+
 
 
 
@@ -35,18 +37,26 @@ type subProcesoStruct struct{
 
 
 
-
 func main () {
 
-
-
-myRouter := mux.NewRouter().StrictSlash(true)
 	//http.HandleFunc("/memoria", ramInfo)
-	myRouter.HandleFunc("/proceso/{id}", returnSingleArticle)
-	http.HandleFunc("/proceso", procesosInfo)
+	router := mux.NewRouter().StrictSlash(true)
+	mux.CORSMethodMiddleware(router)
 
-	http.ListenAndServe(":3000", nil)
-	http.ListenAndServe(":10000", myRouter)
+	router.HandleFunc("/", Index)
+	router.HandleFunc("/todos", TodoIndex)
+	router.HandleFunc("/todos/{todoId}", TodoShow)
+	router.HandleFunc("/proceso", procesosInfo)
+
+
+
+	log.Fatal(http.ListenAndServe(":4000", router))
+
+
+
+
+	//http.ListenAndServe(":3000", nil)
+
 
 }
 
@@ -83,6 +93,8 @@ func ramInfo(w http.ResponseWriter, r *http.Request) {
 
 			w.Header().Set("Content-Type", "application/json")
 			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		  w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 			w.WriteHeader(http.StatusOK)
 			w.Write(jsonResponse)
 	}else {
@@ -175,14 +187,37 @@ fmt.Println("Made 10000 random strings like", proceso)
 //	fmt.Println("json:", proceso)
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 	w.WriteHeader(http.StatusOK)
+
 
 }
 
+func Index(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintln(w, "Welcome!")
+}
 
-func returnSingleArticle(w http.ResponseWriter, r *http.Request){
+func TodoIndex(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintln(w, "Todo Index!")
+}
+
+func TodoShow(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
-    key := vars["id"]
+    todoId := vars["todoId"]
 
-    fmt.Fprintf(w, "Key: " + key)
+		arg0 := "kill"
+		arg1 := todoId
+
+		cmd := exec.Command(arg0, arg1)
+		stdout, err := cmd.Output()
+
+		if err != nil {
+				fmt.Println(err.Error())
+				return
+		}
+
+		fmt.Print(string(stdout))
+
+    fmt.Fprintln(w, "Todo showsadadasas se elimon:", todoId)
 }
